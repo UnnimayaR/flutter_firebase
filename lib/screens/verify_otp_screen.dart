@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/auth_controller.dart';
+import '../app/modules/auth/controllers/auth_controller.dart';
 
 class VerifyOTPScreen extends StatelessWidget {
   final AuthController authController = Get.find();

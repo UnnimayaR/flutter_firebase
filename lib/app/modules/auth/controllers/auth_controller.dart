@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_firebase/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -9,17 +10,25 @@ class AuthController extends GetxController {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Rx<User?> user = Rx<User?>(null);
+  User? currentUser;
 
   @override
   void onInit() {
     user.bindStream(_auth.authStateChanges());
+    _auth.authStateChanges().listen((User? userr) {
+      user = Rx<User?>(userr);
+      currentUser = userr;
+      update();
+
+      if (user != Rx<User?>(null)) Get.toNamed(Routes.home);
+    });
     super.onInit();
   }
 
   Future<void> signInWithGoogle() async {
-    log('signInWithGoogle');
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
       if (googleUser == null) return;
 
       final GoogleSignInAuthentication googleAuth =
@@ -30,6 +39,8 @@ class AuthController extends GetxController {
       );
 
       await _auth.signInWithCredential(credential);
+      user = Rx<User?>(_auth.currentUser);
+      if (user != Rx<User?>(null)) Get.toNamed(Routes.home);
     } catch (e) {
       log(e.toString());
       Get.snackbar('Error', e.toString());
