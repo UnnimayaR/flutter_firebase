@@ -26,7 +26,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
         ),
         body: GetBuilder<HomeController>(builder: (controller) {
           double totalAmount = 0.0;
-          for (var dish in controller.cartItems) {
+          for (var dish in controller.addedToCart) {
             double price = double.parse(dish.price.replaceAll(',', ''));
             totalAmount += price;
             totalAmount += dish.addons.fold(0.0, (sum, addon) {
@@ -53,7 +53,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              '${controller.cartItems.length} Dishes - ${controller.cartItems.length} Items',
+                              '${controller.addedToCart.length} Dishes - ${controller.addedToCart.length} Items',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),
@@ -70,7 +70,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                               name: item.name,
                               price: double.parse(item.price.toString()),
                               calories: item.calories,
-                              quantity: controller.cartItems
+                              quantity: controller.addedToCart
                                   .where((e) => e.id == item.id)
                                   .length,
                               onDecrease: () {

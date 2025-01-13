@@ -33,12 +33,15 @@ class HomeController extends GetxController with GetTickerProviderStateMixin {
   }
 
   updateCart() async {
-    await LocalDataSource.setMenuItems(addedToCart.toSet().toList());
+    await LocalDataSource.setMenuItems(addedToCart);
 
-    cartItems = await LocalDataSource.getMenuItems();
-    cartItems = cartItems.toSet().toList();
-    for (var element in cartItems) {
-      log('${element.id}   ${element.name}    ');
+    List<Dish> items = await LocalDataSource.getMenuItems();
+    // cartItems = cartItems.toSet().toList();
+    for (var element in items) {
+      element.qty = items.where((e) => e.id == element.id).length;
+      cartItems.addIf(
+          cartItems.where((e) => e.id == element.id).isEmpty, element);
+      log('mmmmmmmmmmmmmmmm ${cartItems.length}');
     }
     update();
   }

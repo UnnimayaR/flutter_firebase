@@ -36,6 +36,7 @@ class Dish {
   final String price;
   final String currency;
   final int calories;
+  int? qty;
   final String description;
   final List<Addon> addons;
   final String imageUrl;
@@ -53,6 +54,7 @@ class Dish {
     required this.imageUrl,
     required this.customizationsAvailable,
     required this.isVeg,
+    this.qty,
   });
 
   factory Dish.fromJson(Map<String, dynamic> json) {
@@ -67,6 +69,7 @@ class Dish {
           .map((addonJson) => Addon.fromJson(addonJson))
           .toList(),
       imageUrl: json['image_url'] ?? '',
+      qty: json['qty'] ?? 0,
       customizationsAvailable: json['customizations_available'] ?? false,
       isVeg: false,
     );

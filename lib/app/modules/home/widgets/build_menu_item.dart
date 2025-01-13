@@ -88,7 +88,7 @@ Widget buildMenuItem(Dish item) {
                               color: Colors.green,
                               iconSize: 20,
                             ),
-                            Text((controller.cartItems
+                            Text((controller.addedToCart
                                     .where((e) => e.id == item.id)
                                     .length)
                                 .toString()),

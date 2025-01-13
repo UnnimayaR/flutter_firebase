@@ -46,7 +46,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                   child: GetBuilder<HomeController>(
                       builder: (controller) => Text(
-                            controller.cartItems.length.toString(),
+                            controller.addedToCart.length.toString(),
                             style: TextStyle(color: Colors.white, fontSize: 12),
                             textAlign: TextAlign.center,
                           )),
