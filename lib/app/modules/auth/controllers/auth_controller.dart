@@ -58,7 +58,7 @@ class AuthController extends GetxController {
           Get.snackbar('Error', e.message ?? 'Verification failed');
         },
         codeSent: (String verificationId, int? resendToken) {
-          Get.toNamed('/verify', arguments: verificationId);
+          Get.toNamed(Routes.verify, arguments: verificationId);
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );

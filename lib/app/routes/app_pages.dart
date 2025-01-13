@@ -1,3 +1,4 @@
+import 'package:flutter_firebase/app/modules/auth/views/verify_otp_screen.dart';
 import 'package:flutter_firebase/app/modules/home/bindings/home_bindings.dart';
 import 'package:flutter_firebase/app/modules/auth/views/auth_screen.dart';
 import 'package:flutter_firebase/app/modules/home/views/order_summary.dart';
@@ -25,6 +26,10 @@ class AppPages {
     GetPage(
       name: _Paths.orderSummary,
       page: () => OrderSummaryPage(),
+    ),
+    GetPage(
+      name: _Paths.verify,
+      page: () => VerifyOTPScreen(),
     ),
   ];
 }
